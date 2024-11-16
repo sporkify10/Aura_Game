@@ -1,0 +1,94 @@
+body {
+    font-family: 'Venite Adoremus', sans-serif;
+    background: url('https://th.bing.com/th/id/R.3b3db79fa43ddab87f6c789e68a0d6ed?rik=R9PXp92D6qziQQ&riu=http%3a%2f%2fgetwallpapers.com%2fwallpaper%2ffull%2f8%2fa%2f8%2f238785.jpg&ehk=75qdxs3PzsChYPttvl0E7rfy3CYKeWxPIFElpgzui3o%3d&risl=&pid=ImgRaw&r=0') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.container {
+    text-align: center;
+    position: relative;
+}
+
+.title {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.result-header {
+    margin-bottom: 20px;
+}
+
+.aura-name {
+    font-size: 1.5rem;
+}
+
+.aura-image {
+    width: 150px;
+    height: 150px;
+    margin-top: 10px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 255, 0.8);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+.controls {
+    margin-top: 40px;
+}
+
+#rollButton {
+    background-color: rgba(255, 0, 0, 0.8);
+}
+
+.roll-history, .inventory {
+    position: absolute;
+    bottom: 20px;
+    width: 300px;
+    max-height: 250px;
+    overflow-y: auto;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+}
+
+#searchInventory {
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 100%;
+}
+
+#historyList, #inventoryList {
+    list-style: none;
+    padding: 0;
+}
+
+#historyList li, #inventoryList li {
+    background-color: rgba(0, 0, 255, 0.2);
+    margin-bottom: 5px;
+    padding: 5px;
+    border-radius: 5px;
+}
