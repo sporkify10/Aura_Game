@@ -4,41 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aura Game</title>
-    <link href="https://fonts.cdnfonts.com/css/venite-adoremus" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <!-- Link to the CSS file in the styles folder -->
+    <link rel="stylesheet" href="../styles/style.css">
 </head>
 <body>
-    <div class="container">
-        <h1 class="title">Aura Game</h1>
+    <div id="game">
+        <h1 id="gameTitle">Aura Game</h1>
 
-        <div id="rollResult">
-            <div class="result-header">
-                <p>You got:</p>
-                <p id="auraName" class="aura-name"></p>
-                <img id="auraImage" class="aura-image" src="" alt="Aura Image" />
-            </div>
-            <div class="buttons">
-                <button id="saveButton">Save</button>
-                <button id="skipButton">Skip</button>
-            </div>
+        <!-- Roll Button -->
+        <button id="rollButton" class="button">Roll Aura</button>
+
+        <!-- Aura Display Section -->
+        <div id="auraDisplay" class="hidden">
+            <p id="auraMessage">You Got:</p>
+            <img id="auraImage" src="" alt="Aura Image">
+            <button id="saveAura" class="button">Save</button>
+            <button id="skipAura" class="button">Skip</button>
         </div>
 
-        <div class="controls">
-            <button id="rollButton">Roll Aura</button>
+        <!-- Roll History Section -->
+        <div id="historySection">
+            <button id="historyButton" class="button">Roll History</button>
+            <div id="historyList" class="hidden"></div>
         </div>
 
-        <div class="roll-history">
-            <h3>Roll History</h3>
-            <ul id="historyList"></ul>
-        </div>
-
-        <div class="inventory">
-            <h3>Inventory</h3>
-            <input type="text" id="searchInventory" placeholder="Search Inventory" />
-            <ul id="inventoryList"></ul>
+        <!-- Inventory Section -->
+        <div id="inventorySection">
+            <button id="inventoryButton" class="button">Inventory</button>
+            <div id="inventoryList" class="hidden"></div>
+            <input type="text" id="searchBox" placeholder="Search Inventory">
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Link to the JavaScript file in the js folder -->
+    <script src="../js/script.js"></script>
 </body>
 </html>
