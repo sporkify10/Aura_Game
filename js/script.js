@@ -1,91 +1,61 @@
-// Aura data (you can extend this with more auras and their images)
-const auras = [
-    { name: 'End', image: 'https://i.imghippo.com/files/oCl8350wk.png' },
-    { name: 'Aura 2', image: 'https://placekitten.com/200/200' },
-    { name: 'Aura 3', image: 'https://placekitten.com/200/201' }
-];
+// Roll history array
+let rollHistory = [];
 
-let history = [];
-let inventory = [];
-let currentAura = null;
-
-// DOM elements
+// Get elements
 const rollButton = document.getElementById('rollButton');
-const rollResult = document.getElementById('rollResult');
+const saveSkipButtons = document.getElementById('saveSkipButtons');
 const saveButton = document.getElementById('saveButton');
 const skipButton = document.getElementById('skipButton');
-const auraName = document.getElementById('auraName');
+const output = document.getElementById('output');
 const auraImage = document.getElementById('auraImage');
 const historyList = document.getElementById('historyList');
-const inventoryList = document.getElementById('inventoryList');
-const searchInventory = document.getElementById('searchInventory');
 
-// Functions
+// Aura images array (you can expand this)
+const auras = [
+    { name: "End Aura", img: "public/your-aura-image.png" },
+    { name: "Mystic Aura", img: "public/mystic-aura.png" }
+];
+
+// Function to roll an aura
 function rollAura() {
-    const randomIndex = Math.floor(Math.random() * auras.length);
-    currentAura = auras[randomIndex];
+    // Pick a random aura
+    const randomAura = auras[Math.floor(Math.random() * auras.length)];
+    
+    // Show the result
+    output.innerHTML = `<h2>You Got</h2><img src="${randomAura.img}" alt="${randomAura.name}">`;
+    auraImage.style.display = 'block';
+    
+    // Show save/skip buttons
+    saveSkipButtons.style.display = 'flex';
 
-    auraName.textContent = currentAura.name;
-    auraImage.src = currentAura.image;
-
-    rollResult.style.display = 'block';
-    rollButton.style.display = 'none';
-
-    // Add the rolled aura to history
-    history.push(currentAura);
-    displayHistory();
+    // Add to roll history
+    rollHistory.push(randomAura.name);
+    updateHistory();
 }
 
-function displayHistory() {
-    historyList.innerHTML = '';
-    history.forEach(aura => {
-        const li = document.createElement('li');
-        li.textContent = aura.name;
-        historyList.appendChild(li);
+// Function to update roll history list
+function updateHistory() {
+    historyList.innerHTML = '';  // Clear previous list
+    rollHistory.forEach(aura => {
+        const listItem = document.createElement('li');
+        listItem.textContent = aura;
+        historyList.appendChild(listItem);
     });
 }
 
-function saveAura() {
-    inventory.push(currentAura);
-    displayInventory();
-    closeResult();
-}
-
-function skipAura() {
-    closeResult();
-}
-
-function displayInventory() {
-    inventoryList.innerHTML = '';
-    inventory.forEach(aura => {
-        const li = document.createElement('li');
-        li.textContent = aura.name;
-        inventoryList.appendChild(li);
-    });
-}
-
-function closeResult() {
-    rollResult.style.display = 'none';
-    rollButton.style.display = 'block';
-}
-
-// Event listeners
-rollButton.addEventListener('click', rollAura);
-saveButton.addEventListener('click', saveAura);
-skipButton.addEventListener('click', skipAura);
-
-// Search Inventory
-searchInventory.addEventListener('input', function () {
-    const searchQuery = searchInventory.value.toLowerCase();
-    const filteredInventory = inventory.filter(aura => aura.name.toLowerCase().includes(searchQuery));
-    displayFilteredInventory(filteredInventory);
+// Save button action
+saveButton.addEventListener('click', function() {
+    alert('Aura saved!');
+    saveSkipButtons.style.display = 'none';
+    output.innerHTML = ''; // Clear output after saving
 });
 
-function displayFilteredInventory(filteredInventory) {
-    inventoryList.innerHTML = '';
-    filteredInventory.forEach(aura => {
-        const li = document.createElement('li');
-        li.textContent = aura.name;
-        inventoryList.appendChild(li);
-    });
-}
+// Skip button action
+skipButton.addEventListener('click', function() {
+    alert('Aura skipped!');
+    saveSkipButtons.style.display = 'none';
+    output.innerHTML = ''; // Clear output after skipping
+});
+
+// Roll button action
+rollButton.addEventListener('click', rollAura);

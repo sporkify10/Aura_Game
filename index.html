@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Game</title>
+    <link rel="stylesheet" href="styles/style.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+    <div class="container">
+        <h1>Aura Game</h1>
+
+        <!-- Roll Result Display -->
+        <div id="output" class="output">
+            <h2>You Got</h2>
+            <img id="auraImage" src="public/your-aura-image.png" alt="Aura Image" style="display: none;">
+        </div>
+
+        <!-- Roll Button -->
+        <button id="rollButton" class="roll-button">Roll</button>
+
+        <!-- Save/Skip Buttons -->
+        <div id="saveSkipButtons" class="save-skip-buttons" style="display: none;">
+            <button id="saveButton">Save</button>
+            <button id="skipButton">Skip</button>
+        </div>
+
+        <!-- Roll History -->
+        <div id="rollHistory" class="roll-history">
+            <h3>Roll History</h3>
+            <ul id="historyList">
+                <!-- Roll history will be appended here -->
+            </ul>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script> <!-- Link to your JS file -->
+</body>
+</html>
