@@ -3,37 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aura Game</title>
-    <link rel="stylesheet" href="styles/style.css"> <!-- Link to your CSS file -->
+    <title>Aura Roll Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://i.imghippo.com/files/oCl8350wk.png') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            color: white;
+        }
+
+        .container {
+            text-align: center;
+            width: 80%;
+        }
+
+        #auraDisplay {
+            display: none;
+            margin-top: 20px;
+            font-size: 1.5em;
+        }
+
+        #auraImage {
+            width: 200px;
+            height: auto;
+            margin-top: 10px;
+        }
+
+        .button {
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .button:hover {
+            transform: scale(1.1);
+        }
+
+        #history {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+            color: white;
+            max-width: 300px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>Aura Game</h1>
-
-        <!-- Roll Result Display -->
-        <div id="output" class="output">
-            <h2>You Got</h2>
-            <img id="auraImage" src="public/your-aura-image.png" alt="Aura Image" style="display: none;">
-        </div>
-
-        <!-- Roll Button -->
-        <button id="rollButton" class="roll-button">Roll</button>
-
-        <!-- Save/Skip Buttons -->
-        <div id="saveSkipButtons" class="save-skip-buttons" style="display: none;">
-            <button id="saveButton">Save</button>
-            <button id="skipButton">Skip</button>
-        </div>
-
-        <!-- Roll History -->
-        <div id="rollHistory" class="roll-history">
-            <h3>Roll History</h3>
-            <ul id="historyList">
-                <!-- Roll history will be appended here -->
-            </ul>
+        <h1>Aura Roll Game</h1>
+        <button id="rollButton" class="button">Roll for Aura</button>
+        <div id="auraDisplay">
+            <h2>You Got:</h2>
+            <p id="auraName">End!</p>
+            <img id="auraImage" src="https://i.imghippo.com/files/oCl8350wk.png" alt="Aura Image">
+            <div>
+                <button id="saveButton" class="button">Save</button>
+                <button id="skipButton" class="button">Skip</button>
+            </div>
         </div>
     </div>
 
-    <script src="js/script.js"></script> <!-- Link to your JS file -->
+    <div id="history"></div>
+
+    <script>
+        const rollButton = document.getElementById("rollButton");
+        const auraDisplay = document.getElementById("auraDisplay");
+        const auraName = document.getElementById("auraName");
+        const auraImage = document.getElementById("auraImage");
+        const saveButton = document.getElementById("saveButton");
+        const skipButton = document.getElementById("skipButton");
+        const historyDiv = document.getElementById("history");
+
+        // List of possible auras
+        const auras = [
+            { name: "End!", image: "https://i.imghippo.com/files/oCl8350wk.png" },
+            { name: "Glitch", image: "https://example.com/glitch.png" },
+            // Add more auras here
+        ];
+
+        let rollHistory = [];
+
+        // Roll the aura
+        rollButton.addEventListener("click", () => {
+            // Pick a random aura from the list
+            const randomAura = auras[Math.floor(Math.random() * auras.length)];
+
+            // Display the aura info
+            auraName.textContent = randomAura.name;
+            auraImage.src = randomAura.image;
+            auraDisplay.style.display = "block";
+
+            // Hide the roll button
+            rollButton.style.display = "none";
+        });
+
+        // Save the aura to the history
+        saveButton.addEventListener("click", () => {
+            const auraNameText = auraName.textContent;
+            const auraImageSrc = auraImage.src;
+
+            // Add the saved aura to the history
+            rollHistory.push({ name: auraNameText, image: auraImageSrc });
+
+            // Update the history display
+            updateHistory();
+
+            // Hide the aura display and show the roll button again
+            auraDisplay.style.display = "none";
+            rollButton.style.display = "inline-block";
+        });
+
+        // Skip the aura
+        skipButton.addEventListener("click", () => {
+            // Hide the aura display and show the roll button again
+            auraDisplay.style.display = "none";
+            rollButton.style.display = "inline-block";
+        });
+
+        // Update the roll history display
+        function updateHistory() {
+            historyDiv.innerHTML = "<h3>Roll History:</h3>";
+            rollHistory.forEach((aura, index) => {
+                const auraItem = document.createElement("div");
+                auraItem.innerHTML = `<strong>${aura.name}</strong><br><img src="${aura.image}" alt="${aura.name}" style="width: 50px;">`;
+                historyDiv.appendChild(auraItem);
+            });
+        }
+    </script>
 </body>
 </html>
